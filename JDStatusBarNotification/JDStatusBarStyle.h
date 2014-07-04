@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+@class JDStatusBarView;
+
+typedef void(^JDStatusBarViewPostAction)(JDStatusBarView *view);
+
 extern NSString *const JDStatusBarStyleError;   /// This style has a red background with a white Helvetica label.
 extern NSString *const JDStatusBarStyleWarning; /// This style has a yellow background with a gray Helvetica label.
 extern NSString *const JDStatusBarStyleSuccess; /// This style has a green background with a white Helvetica label.
@@ -51,6 +55,8 @@ typedef NS_ENUM(NSInteger, JDStatusBarProgressBarPosition) {
 @property (nonatomic, assign) CGFloat textVerticalPositionAdjustment;
 
 @property (nonatomic, strong) UIImage *image;
+
+@property (nonatomic, copy) JDStatusBarViewPostAction postAction;
 
 #pragma mark Animation
 

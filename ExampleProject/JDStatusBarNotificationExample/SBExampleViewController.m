@@ -43,6 +43,15 @@ static NSString *const SBStyle2 = @"SBStyle2";
                                            style.progressBarColor = [UIColor colorWithRed:0.986 green:0.062 blue:0.598 alpha:1.000];
                                            style.progressBarHeight = 20.0;
                                            style.image = [UIImage imageNamed:@"noInternetNotificationIcon"];
+                                           style.postAction = ^(JDStatusBarView *view) {
+                                               [UIView animateWithDuration:0.5f delay:0.0f
+                                                                   options:UIViewAnimationOptionAutoreverse | UIViewAnimationOptionRepeat | UIViewAnimationOptionCurveEaseInOut
+                                                                animations:^{
+                                                                        view.backgroundColor = [UIColor greenColor];
+                                                                }
+                                                                completion:NULL];
+                                           };
+                                           
                                            return style;
                                        }];
         

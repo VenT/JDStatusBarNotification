@@ -242,6 +242,9 @@
         }];
     }
     
+    if (style.postAction != NULL)
+        style.postAction(self.topBar);
+    
     return self.topBar;
 }
 

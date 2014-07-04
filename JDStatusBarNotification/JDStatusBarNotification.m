@@ -30,6 +30,7 @@
 @property (nonatomic, weak) JDStatusBarStyle *activeStyle;
 @property (nonatomic, strong) JDStatusBarStyle *defaultStyle;
 @property (nonatomic, strong) NSMutableDictionary *userStyles;
+
 @end
 
 @implementation JDStatusBarNotification
@@ -214,6 +215,9 @@
     textLabel.font = style.font;
     textLabel.accessibilityLabel = status;
     textLabel.text = status;
+    
+    if (style.image)
+        self.topBar.imageView.image = style.image;
     
     if (style.textShadow) {
         textLabel.shadowColor = style.textShadow.shadowColor;

@@ -50,6 +50,8 @@ typedef NS_ENUM(NSInteger, JDStatusBarProgressBarPosition) {
 /// A correction of the vertical label position in points. Default is 0.0
 @property (nonatomic, assign) CGFloat textVerticalPositionAdjustment;
 
+@property (nonatomic, strong) UIImage *image;
+
 #pragma mark Animation
 
 /// The animation, that is used to present the notification

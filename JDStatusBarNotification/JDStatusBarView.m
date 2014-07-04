@@ -9,8 +9,11 @@
 #import "JDStatusBarView.h"
 
 @interface JDStatusBarView ()
+
 @property (nonatomic, strong) UILabel *textLabel;
+@property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
+
 @end
 
 @implementation JDStatusBarView
@@ -29,6 +32,18 @@
         [self addSubview:_textLabel];
     }
     return _textLabel;
+}
+
+- (UIImageView *)imageView
+{
+    if (_imageView == nil)
+    {
+        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.height - 1, self.bounds.size.height - 1)];
+        
+        [self insertSubview:_imageView belowSubview:_textLabel];
+    }
+    
+    return _imageView;
 }
 
 - (UIActivityIndicatorView *)activityIndicatorView;
@@ -56,14 +71,28 @@
     [super layoutSubviews];
     
     // label
-    self.textLabel.frame = CGRectMake(0, 1+self.textVerticalPositionAdjustment,
-                                      self.bounds.size.width, self.bounds.size.height-1);
+    CGSize textSize = [self currentTextSize];
+    self.textLabel.frame = CGRectMake((self.bounds.size.width - textSize.width) / 2, 1 + self.textVerticalPositionAdjustment,
+                                      textSize.width + 2, self.bounds.size.height - 1);
+    
+    if (_imageView)
+    {
+        // size to fit
+        CGRect imageViewFrame = _imageView.frame;
+        imageViewFrame.size.width = _imageView.image.size.width;
+        imageViewFrame.size.height = _imageView.image.size.height;
+        
+        imageViewFrame.origin.x = round((self.bounds.size.width - self.textLabel.frame.size.width - imageViewFrame.size.width * 2 - 6.0f) / 2.0);
+        imageViewFrame.origin.y = ceil((self.bounds.size.height - imageViewFrame.size.height) / 2.0);
+        
+        _imageView.frame = imageViewFrame;
+    }
+    
     
     // activity indicator
     if (_activityIndicatorView ) {
-        CGSize textSize = [self currentTextSize];
         CGRect indicatorFrame = _activityIndicatorView.frame;
-        indicatorFrame.origin.x = round((self.bounds.size.width - textSize.width)/2.0) - indicatorFrame.size.width - 8.0;
+        indicatorFrame.origin.x = round((self.bounds.size.width - self.textLabel.frame.size.width - (_imageView != nil ? _imageView.frame.size.width * 2 : 0) - indicatorFrame.size.width * 2 - 12.0f) / 2.0);
         indicatorFrame.origin.y = ceil(1+(self.bounds.size.height - indicatorFrame.size.height)/2.0);
         _activityIndicatorView.frame = indicatorFrame;
     }

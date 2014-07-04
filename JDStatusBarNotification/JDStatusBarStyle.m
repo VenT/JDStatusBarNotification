@@ -29,6 +29,7 @@ NSString *const JDStatusBarStyleDark    = @"JDStatusBarStyleDark";
     style.progressBarColor = self.progressBarColor;
     style.progressBarHeight = self.progressBarHeight;
     style.progressBarPosition = self.progressBarPosition;
+    style.image = self.image;
     return style;
 }
 

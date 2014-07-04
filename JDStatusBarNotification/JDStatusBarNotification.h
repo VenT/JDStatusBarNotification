@@ -165,5 +165,3 @@ typedef JDStatusBarStyle*(^JDPrepareStyleBlock)(JDStatusBarStyle *style);
 + (BOOL)isVisible;
 
 @end
-
-

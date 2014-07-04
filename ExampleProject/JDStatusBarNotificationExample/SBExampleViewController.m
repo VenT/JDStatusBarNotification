@@ -42,6 +42,7 @@ static NSString *const SBStyle2 = @"SBStyle2";
                                            style.font = [UIFont fontWithName:@"SnellRoundhand-Bold" size:17.0];
                                            style.progressBarColor = [UIColor colorWithRed:0.986 green:0.062 blue:0.598 alpha:1.000];
                                            style.progressBarHeight = 20.0;
+                                           style.image = [UIImage imageNamed:@"noInternetNotificationIcon"];
                                            return style;
                                        }];
         
@@ -187,9 +188,11 @@ static NSString *const SBStyle2 = @"SBStyle2";
         self.indicatorStyle = (row==0) ? UIActivityIndicatorViewStyleWhite : UIActivityIndicatorViewStyleGray;
         
         NSString *style = (row==0) ? SBStyle1 : SBStyle2;
+
         [JDStatusBarNotification showWithStatus:status
                                    dismissAfter:4.0
                                       styleName:style];
+        [JDStatusBarNotification showActivityIndicator:YES indicatorStyle:UIActivityIndicatorViewStyleWhite];
     } else if (section == 3) {
         SBCustomStyleViewController* viewController = [[SBCustomStyleViewController alloc] init];
         viewController.title = [tableView cellForRowAtIndexPath:indexPath].textLabel.text;
